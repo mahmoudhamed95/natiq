@@ -1,70 +1,153 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Natiq App
 
-## Available Scripts
+Natiq is a React-based application designed to convert Arabic text into spoken words, with the unique functionality of echoing the last word three times. 
+The application utilizes the **RDI Natiq API** for generating audio.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
+- **Text-to-Speech**: Converts Arabic text into audio.
+- **Echo Effect**: Repeats the last word three times in the audio.
+- **User-Friendly Interface**: Easy-to-navigate pages (Home, About, and Natiq).
+- **Responsive Design**: Works seamlessly across devices.
+- **Dockerized**: Easily deploy the app using Docker.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+Follow these instructions to set up and run the project on your local machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [Docker](https://www.docker.com/) (optional, for containerized deployment)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mahmoudhamed95/natiq.git
+   cd natiq-app
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Available Scripts
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In the project directory, you can run the following scripts:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### `npm start`
+- Starts the app in development mode.
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- The app reloads automatically when changes are made.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### `npm test`
+- Launches the test runner.
+- Use this to run unit and integration tests for the application.
 
-## Learn More
+#### `npm run build`
+- Builds the app for production.
+- The optimized build is output to the `build` folder, ready for deployment.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### `npm run eject`
+- This command exposes configuration files for advanced customization. Use with caution as it is irreversible.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### Running the App with Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Build the Docker image:
+   ```bash
+   docker build -t natiq-app .
+   ```
 
-### Analyzing the Bundle Size
+2. Run the Docker container:
+   ```bash
+   docker run -p 3000:3000 natiq-app
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Open [http://localhost:3000](http://localhost:3000) to access the app.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Project Structure
 
-### Advanced Configuration
+```
+src/
+├── components/
+│   ├── Navbar.js      // Navigation bar
+├── views/
+│   ├── Home.js        // Home page
+│   ├── About.js       // About page
+│   └── Natiq.js       // Core functionality
+├── App.js             // Main app entry
+├── App.css            // Global styles
+├── index.js           // React entry point
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
+
+### Testing
+
+The app includes unit and integration tests to ensure functionality.
+
+1. Run tests:
+   ```bash
+   npm test
+   ```
+
+2. Example tests:
+   - Ensure components render correctly.
+   - Validate API requests and responses.
+
+---
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+You can deploy the production build of the app to any static hosting service, such as:
+- [Vercel](https://vercel.com/)
+- [Netlify](https://www.netlify.com/)
+- [AWS S3](https://aws.amazon.com/s3/)
 
-### `npm run build` fails to minify
+To build the app for deployment:
+```bash
+npm run build
+```
+Deploy the contents of the `build` folder to your preferred hosting service.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+### API Integration
+
+The app uses the **RDI Natiq API** to convert text to audio. Below is a summary of the API:
+
+- **Endpoint**: `https://echo-6sdzv54itq-uc.a.run.app/natiq`
+- **Request Format**: JSON
+  ```json
+  {
+    "text": "Your Arabic text here"
+  }
+  ```
+- **Response**:
+  - `wave`: A base64-encoded audio string.
+  - The app processes this response to generate and play audio.
+
+---
+
+## Contributions
+
+We welcome contributions to improve the Natiq App! Feel free to open issues or submit pull requests on [GitHub](https://github.com/mahmoudhamed95/natiq).
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
